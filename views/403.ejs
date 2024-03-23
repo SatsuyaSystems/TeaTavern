@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <script src="/assets/js/exploitcore.js"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>EXPLOIT | Forbidden</title>
+    <link rel="icon" href="/assets/img/logo.png">
+    <meta name="google-site-verification" content="cVhq9ZfHrhmrGg9b98xy7u8mVKhpRCEd7H4EGivGIQU" />
+    <meta name="keywords" content="Twitch, Bots, Follower, Follow Bots, Exploit, Shop, Views, View Bot, TikTok, Anime Generator, Hentai Generator"/>
+    <style media="screen">
+      body { background: #ECEFF1; color: rgba(0,0,0,0.87); font-family: Roboto, Helvetica, Arial, sans-serif; margin: 0; padding: 0; }
+      #message { background: white; max-width: 360px; margin: 100px auto 16px; padding: 32px 24px 16px; border-radius: 3px; }
+      #message h3 { color: #888; font-weight: normal; font-size: 16px; margin: 16px 0 12px; }
+      #message h2 { color: #ffa100; font-weight: bold; font-size: 16px; margin: 0 0 8px; }
+      #message h1 { font-size: 22px; font-weight: 300; color: rgba(0,0,0,0.6); margin: 0 0 16px;}
+      #message p { line-height: 140%; margin: 16px 0 24px; font-size: 14px; }
+      #message a { display: block; text-align: center; background: #039be5; text-transform: uppercase; text-decoration: none; color: white; padding: 16px; border-radius: 4px; }
+      #message, #message a { box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24); }
+      #load { color: rgba(0,0,0,0.4); text-align: center; font-size: 13px; }
+      @media (max-width: 600px) {
+        body, #message { margin-top: 0; background: white; box-shadow: none; }
+        body { border-top: 16px solid #ffa100; }
+      }
+    </style>
+    <script language="JavaScript">
+      //////////F12 disable code////////////////////////
+            document.onkeypress = function (event) {
+                event = (event || window.event);
+                if (event.keyCode == 123) {
+                   //alert('No F-12');
+                    return false;
+                }
+            }
+            document.onmousedown = function (event) {
+                event = (event || window.event);
+                if (event.keyCode == 123) {
+                    //alert('No F-keys');
+                    return false;
+                }
+            }
+        document.onkeydown = function (event) {
+                event = (event || window.event);
+                if (event.keyCode == 123) {
+                    //alert('No F-keys');
+                    return false;
+                }
+            }
+        var message=":o";      
+        function clickIE() {if (document.all) {(message);return false;}}
+        function clickNS(e) {if
+        (document.layers||(document.getElementById&&!document.all)) {
+        if (e.which==2||e.which==3) {(message);return false;}}}
+        if (document.layers)
+        {document.captureEvents(Event.MOUSEDOWN);document.onmousedown=clickNS;}
+        else{document.onmouseup=clickNS;document.oncontextmenu=clickIE;}
+        document.oncontextmenu=new Function("return false")
+        function disableCtrlKeyCombination(e)
+        {
+        var forbiddenKeys = new Array('a', 'n', 'c', 'x', 'v', 'j' , 'w');
+        var key;
+        var isCtrl;
+        if(window.event)
+        {
+        key = window.event.keyCode;
+        if(window.event.ctrlKey)
+        isCtrl = true;
+        else
+        isCtrl = false;
+        }
+        else
+        {
+        key = e.which;
+        if(e.ctrlKey)
+        isCtrl = true;
+        else
+        isCtrl = false;
+        }
+        if(isCtrl)
+        {
+        for(i=0; i<forbiddenKeys.length; i++)
+        {
+        if(forbiddenKeys[i].toLowerCase() == String.fromCharCode(key).toLowerCase())
+        {
+        alert('Key combination CTRL + '+String.fromCharCode(key) +' has been disabled.');
+        return false;
+        }
+        }
+        }
+        return true;
+        }
+    </script>
+  </head>
+  <body>
+    <div id="message">
+      <h2>403</h2>
+      <h1>Forbidden</h1>
+      <p>You are not allowed to visit this page! Please make sure you have access rights!</p>
+      <h3>Why am I seeing this?</h3>
+      <p>You are trying to access endpoints which are not public for everyone! Your login cookies got deleted for security reasons!</p>
+    </div>
+  </body>
+</html>

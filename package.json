@@ -1,0 +1,40 @@
+{
+  "name": "api",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "build-css": "webpack --mode=development",
+    "watch-css": "webpack --watch --mode=development",
+    "dev": "concurrently \"npm run watch-css\" \"nodemon index.js\"",
+    "build": "npm run build-css && cargo tauri build"
+  },
+  "devDependencies": {
+    "concurrently": "^8.2.2",
+    "css-loader": "^6.10.0",
+    "extract-loader": "^5.1.0",
+    "file-loader": "^6.2.0",
+    "mini-css-extract-plugin": "^2.8.1",
+    "sass": "^1.71.1",
+    "sass-loader": "^14.1.1",
+    "style-loader": "^3.3.4",
+    "webpack": "^5.90.3",
+    "webpack-cli": "^5.1.4"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "axios": "^1.6.7",
+    "body-parser": "^1.19.0",
+    "bootstrap": "^5.3.3",
+    "connect-flash": "^0.1.1",
+    "cookie-parser": "^1.4.6",
+    "dotenv": "^8.2.0",
+    "ejs": "^3.1.5",
+    "express": "^4.17.1",
+    "express-ejs-layouts": "^2.5.0",
+    "jsonwebtoken": "^9.0.2",
+    "mongoose": "^5.11.14",
+    "nodemon": "^2.0.7"
+  }
+}

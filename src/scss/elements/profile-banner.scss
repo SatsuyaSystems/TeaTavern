@@ -1,0 +1,17 @@
+.banner-background {
+    position: relative;
+    width: 100%;
+    padding-top: 34%; // Adjust based on the aspect ratio of your banner image
+    background-size: cover;
+    background-position: center;
+}
+
+.avatar-position {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 94px;
+    height: auto;
+    margin: 0; // Reset margin to ensure alignment
+    transform: translate(50%, 50%); // Adjusts the position to center the avatar more naturally at the bottom
+}
