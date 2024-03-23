@@ -30,12 +30,12 @@
                                         <input id="order-id" type="text" name="code" class="text-center list-group-item list-group-item-action" placeholder="Code" required/>
                                         <input id="order-info" type="text" name="info" class="text-center list-group-item list-group-item-action" placeholder="Info" />
                                         <select id="order-payed" name="payed" class="text-center list-group-item list-group-item-action" required>
-                                            <option value="" selected>Is order payed?</option>
+                                            <option value="" selected disabled>Is order payed?</option>
                                             <option value="true">True</option>
                                             <option value="false">False</option>
                                         </select>
                                         <select id="order-shipped" name="shipped" class="text-center list-group-item list-group-item-action" required>
-                                            <option value="" selected>Is order shipped?</option>
+                                            <option value="" selected disabled>Is order shipped?</option>
                                             <option value="true">True</option>
                                             <option value="false">False</option>
                                         </select>
@@ -58,11 +58,18 @@
                                             <div class="accordion-item">
                                                 <h2 class="accordion-header" id="flush-heading<%- data['code'] %>"  data-order='<%- JSON.stringify(data) %>' onclick="loadOrder(event)">
                                                     <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapse<%- data['code'] %>" aria-expanded="false" aria-controls="flush-collapse<%- data['code'] %>">
-                                                        <span class="w-100 text-center"><%- data['code'] %> | <%- data['amount'] %>€ | <%- data['payed'] ? 'Payed' : 'Awaiting Payment' %> | Shipped: <%- data['payed'] ? '✅' : '❌' %></span>
+                                                        <span class="w-100 text-center"><%- data['code'] %> | <%- data['amount'] %>€ | <%- data['payed'] ? 'Payed' : 'Awaiting Payment' %> | Shipped: <%- data['shipped'] ? '✅' : '❌' %></span>
                                                     </button>
                                                 </h2>
                                                 <div id="flush-collapse<%- data['code'] %>" class="accordion-collapse collapse" aria-labelledby="flush-heading<%- data['code'] %>" data-bs-parent="#accordionOrderFlush">
-                                                    <div class="accordion-body">User: <code><%- data['user'] %></code> / <code><%- data['userid'] %></code><br><%- data['info'] %></div>
+                                                    <div class="accordion-body">
+                                                        User: <code><%- data['user'] %></code> / <code><a href="/admin/<%- data['userid'] %>"><%- data['userid'] %></a></code><br>
+                                                        <%- data['info'] %>
+                                                        <% if (data['shipped'] == false) { %>
+                                                            <br><br><a href="/api/cancel_order/<%- data['code'] %>" class="btn btn-danger">Cancel Order</a>
+                                                        <% } %>
+                                                        
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>

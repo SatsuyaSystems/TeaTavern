@@ -38,6 +38,23 @@ router.get('/admin', async(req, res) => {
     })
 })
 
+router.get('/admin/:userid', async(req, res) => {
+    if (req.useragent.isMobile == true) return res.render("403")
+    Orders.find({userid: req.params.userid}, function(err, orders){
+        var isAdmin = false
+        if (Admins.user.includes(req.user.id)) { 
+            isAdmin = true 
+            res.render('admin', {
+                User: req.user,
+                Orders: orders.reverse(),
+                Admin: isAdmin
+            })
+        } else {
+            res.redirect("/")
+        }
+    })
+})
+
 router.get('/logout', async(req, res) => {
     res.clearCookie("auth")
     res.redirect("/")

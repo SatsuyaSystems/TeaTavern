@@ -33,7 +33,13 @@ router.post('/set_order', urlencodedParser, async(req, res) => {
 
 router.post('/set_info', urlencodedParser, async(req, res) => {
     if (!Admins.user.includes(req.user.id)) return res.redirect("/")
-    await Orders.findOneAndUpdate({code: req.body.code}, {payed: req.body.payed || false, info: req.body.info || "Payment received", shipped: req.body.shipped || false})
+    await Orders.findOneAndUpdate({code: req.body.code}, {payed: req.body.payed, info: req.body.info || "Payment received", shipped: req.body.shipped})
+    res.redirect("/admin")
+})
+
+router.get('/cancel_order/:code', urlencodedParser, async(req, res) => {
+    if (!Admins.user.includes(req.user.id)) return res.redirect("/")
+    await Orders.findOneAndDelete({code: req.params.code})
     res.redirect("/admin")
 })
 
