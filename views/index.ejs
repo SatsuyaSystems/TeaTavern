@@ -45,11 +45,11 @@
                                             <div class="accordion-item">
                                                 <h2 class="accordion-header" id="flush-heading<%- data['code'] %>">
                                                     <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapse<%- data['code'] %>" aria-expanded="false" aria-controls="flush-collapse<%- data['code'] %>">
-                                                        <span class="w-100 text-center"><%- data['code'] %> | <%- data['amount'] %>€ | <%- data['payed'] ? 'Payed' : 'Awaiting Payment' %> | Shipped: <%- data['payed'] ? '✅' : '❌' %></span>
+                                                        <span class="w-100 text-center"><%- data['code'] %> | <%- data['amount'] %>€ | <%- data['payed'] ? 'Payed' : 'Awaiting Payment' %> | Shipped: <%- data['shipped'] ? '✅' : '❌' %></span>
                                                     </button>
                                                 </h2>
                                                 <div id="flush-collapse<%- data['code'] %>" class="accordion-collapse collapse" aria-labelledby="flush-heading<%- data['code'] %>" data-bs-parent="#accordionOrderFlush">
-                                                    <div class="accordion-body">User: <code><%- data['user'] %></code> / <code><%- data['userid'] %></code><br><%- data['info'] %></div>
+                                                    <div class="accordion-body">User: <code><%- data['user'] %></code> / <code><%- data['userid'] %></code><br><%- data['date'] %><br><%- data['info'] %></div>
                                                 </div>
                                             </div>
                                         </div>
@@ -80,7 +80,11 @@
                 <div class="col-2">
                     <div class="card">
                         <div class="position-relative pb-5">
-                            <div class="banner-background" style="background-image: url('https://cdn.discordapp.com/banners/<%- User['id'] %>/<%- User['banner']%>.<%- User['banner'].startsWith('a_') ? 'gif' : 'png' %>');">
+							<% if (User['banner']){ %>
+	                            <div class="banner-background" style="background-image: url('https://cdn.discordapp.com/banners/<%- User['id'] %>/<%- User['banner']%>.<%- User['banner'].startsWith('a_') ? 'gif' : 'png' %>');">
+                            <% } %>
+                            
+                            
                                 <img src="https://cdn.discordapp.com/avatars/<%- User['id'] %>/<%- User['avatar']%>.<%- User['avatar'].startsWith('a_') ? 'gif' : 'png' %>" class="rounded-circle avatar-position" alt="Profile-image"/>
                             </div>
                         </div>
