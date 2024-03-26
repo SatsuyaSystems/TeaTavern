@@ -10,78 +10,87 @@
 
     </head>
 
-    <body>
+    <body class="bg-transparent">
         <div class="container-fluid">
 
-            <div class="row p-3 bg-light mb-3">        
-                <br>    
-            </div>
+            <div class="row p-3 mb-3"><br></div>
 
-            <div class="row mb-3">
-                <div class="col-10 mt-5"> <!-- Main Container -->
-                    <div class="container">
-                        <div class="row">
-                            <div class="col-3 pt-3">
-                                <form method="post" action="/api/set_order">
-                                    <div class="list-group">
-                                        <button type="button" class="text-center list-group-item list-group-item-action" disabled><strong>For postal shipments the maximum order value is €75 (10g)</strong></button>                                        
-                                        <input type="number" name="amount" class="text-center list-group-item list-group-item-action" placeholder="Money you spend" required/>
-                                        <input type="text" name="coupon" class="text-center list-group-item list-group-item-action" placeholder="Coupon (WIP)" disabled/>
-                                        <button class="btn-primary text-center list-group-item list-group-item-action" type="submit">Order</button>
-                                        
-                                    </div>
+            <div class="row">
+            
+                <div class="container col-8 cbg-white rounded">
 
-                                </form>
-                            </div>
-                                                       
-                            <div class="col-6 pt-3">
-                                <div class="accordion accordion-flush" id="accordionOrderFlush">
+                    <div class="row mb-3">
+                        <div class="mt-5"> <!-- Main Container -->
+                            <div class="container p-0">
+                                <div class="row">
                                     
-                                    <div class="list-group text-center" id="main-middle-two">
-                                        <button type="button" class="text-center list-group-item list-group-item-action" disabled><strong>Order History<br>Newest orders at the top</strong></button>                               
 
-                                        <% Orders.forEach(function(data) { %>
-                                        <div class="list-group-item">
-                                            <div class="accordion-item">
-                                                <h2 class="accordion-header" id="flush-heading<%- data['code'] %>">
-                                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapse<%- data['code'] %>" aria-expanded="false" aria-controls="flush-collapse<%- data['code'] %>">
-                                                        <span class="w-100 text-center"><%- data['code'] %> | <%- data['amount'] %>€ | <%- data['payed'] ? 'Payed' : 'Awaiting Payment' %> | Shipped: <%- data['shipped'] ? '✅' : '❌' %></span>
-                                                    </button>
-                                                </h2>
-                                                <div id="flush-collapse<%- data['code'] %>" class="accordion-collapse collapse" aria-labelledby="flush-heading<%- data['code'] %>" data-bs-parent="#accordionOrderFlush">
-                                                    <div class="accordion-body">User: <code><%- data['user'] %></code> / <code><%- data['userid'] %></code><br><%- data['date'] %><br><%- data['info'] %></div>
+
+                                    <div class="col-3 pt-3">
+                                        <form method="post" action="/api/set_order" id="order-form" class="text-center text-primary">
+                                                <h4>Order</h4>
+                                                <p>For postal shipments the maximum order value is €75 (10g)</p>                               
+                                                <input type="number" name="amount" class="text-center" placeholder="Money you spend" required/>
+                                                <input type="text" name="coupon" class="text-center" placeholder="Coupon (WIP)" disabled/>
+                                                <button class="btn-primary text-center" type="submit">Order</button>
+                                        </form>
+                                    </div>
+                                                
+                                    
+
+
+
+                                    <div class="col-6 pt-3">
+                                        <div class="accordion accordion-flush" id="accordionOrderFlush">
+                                            
+                                            <div class="list-group text-center" id="main-middle-two">
+                                                <button type="button" class="text-center list-group-item list-group-item-action" disabled><strong>Order History<br>Newest orders at the top</strong></button>                               
+        
+                                                <% Orders.forEach(function(data) { %>
+                                                <div class="list-group-item">
+                                                    <div class="accordion-item">
+                                                        <h2 class="accordion-header" id="flush-heading<%- data['code'] %>">
+                                                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapse<%- data['code'] %>" aria-expanded="false" aria-controls="flush-collapse<%- data['code'] %>">
+                                                                <span class="w-100 text-center"><%- data['code'] %> | <%- data['amount'] %>€ | <%- data['payed'] ? 'Payed' : 'Awaiting Payment' %> | Shipped: <%- data['shipped'] ? '✅' : '❌' %></span>
+                                                            </button>
+                                                        </h2>
+                                                        <div id="flush-collapse<%- data['code'] %>" class="accordion-collapse collapse" aria-labelledby="flush-heading<%- data['code'] %>" data-bs-parent="#accordionOrderFlush">
+                                                            <div class="accordion-body">User: <code><%- data['user'] %></code> / <code><%- data['userid'] %></code><br><%- data['date'] %><br><%- data['info'] %></div>
+                                                        </div>
+                                                    </div>
                                                 </div>
+                                                <% }); %>
                                             </div>
                                         </div>
-                                        <% }); %>
+        
+                                    </div>
+        
+                                    <div class="col-3 pt-3">
+                                        <div class="list-group">
+                                            <button type="button" class="list-group-item list-group-item-action" disabled><h2><strong>Buds:</strong></h2></button>
+        
+                                            <span class="list-group-item">- 5g / 40€ (8€ Pro g)       </span>
+                                            <span class="list-group-item">- 10g / 75€ (7.5€ Pro g)    </span>
+                                            <span class="list-group-item">- 20g / 140€ (7€ Pro g)     </span>
+                                            <span class="list-group-item">- 50g / 325€ (6.5€ Pro g)   </span>
+                                            <span class="list-group-item">- 100g / 600€ (6€ Pro g)    </span>
+        
+                                        </div>
+        
                                     </div>
                                 </div>
-
                             </div>
-
-                            <div class="col-3 pt-3">
-                                <div class="list-group">
-                                    <button type="button" class="list-group-item list-group-item-action" disabled><h2><strong>Buds:</strong></h2></button>
-
-                                    <span class="list-group-item">- 5g / 40€ (8€ Pro g)       </span>
-                                    <span class="list-group-item">- 10g / 75€ (7.5€ Pro g)    </span>
-                                    <span class="list-group-item">- 20g / 140€ (7€ Pro g)     </span>
-                                    <span class="list-group-item">- 50g / 325€ (6.5€ Pro g)   </span>
-                                    <span class="list-group-item">- 100g / 600€ (6€ Pro g)    </span>
-
-                                </div>
-
-                            </div>
-                        </div>
+                        </div>    
                     </div>
                 </div>
-
-
+    
+    
+                
                 <div class="col-2">
                     <div class="card">
                         <div class="position-relative pb-5">
-							<% if (User['banner']){ %>
-	                            <div class="banner-background" style="background-image: url('https://cdn.discordapp.com/banners/<%- User['id'] %>/<%- User['banner']%>.<%- User['banner'].startsWith('a_') ? 'gif' : 'png' %>');">
+                            <% if (User['banner']){ %>
+                                <div class="banner-background" style="background-image: url('https://cdn.discordapp.com/banners/<%- User['id'] %>/<%- User['banner']%>.<%- User['banner'].startsWith('a_') ? 'gif' : 'png' %>');">
                             <% } %>
                             
                             
@@ -99,9 +108,11 @@
                         </div>
                     </div>
                 </div>
-                
+
 
             </div>
+
+
         </div>
     </body>
     <footer>

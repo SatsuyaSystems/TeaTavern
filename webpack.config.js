@@ -3,12 +3,11 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 module.exports = {
   mode: 'development',
-  entry: './src/scss/base.scss', // Your main SCSS entry file
+  entry: './src/scss/base.scss',
   output: {
-    // This will output a minimal JS file, which is a side effect of how Webpack handles entry files.
-    // You might not use this JS file if you're only interested in the CSS output.
-    filename: 'bundle.js',
-    path: path.resolve(__dirname, 'src'), // Consider outputting to a 'dist' folder
+    filename: 'js/bundle.js', // This will place a minimal JS bundle in ./assets/js/
+    path: path.resolve(__dirname, 'assets'),
+    publicPath: '/assets/',
   },
   module: {
     rules: [
@@ -16,15 +15,20 @@ module.exports = {
         test: /\.scss$/,
         use: [
           MiniCssExtractPlugin.loader,
-          'css-loader', // Translates CSS into CommonJS
-          'sass-loader' // Compiles Sass to CSS
+          'css-loader',
+          {
+            loader: 'sass-loader',
+            options: {
+              sourceMap: true, // Enable source maps for better debugging
+            },
+          },
         ],
       },
     ],
   },
   plugins: [
     new MiniCssExtractPlugin({
-      filename: '../assets/css/styles.css', // The single CSS file output
+      filename: 'css/styles.css', // Compiles SCSS to CSS in ./assets/css/
     }),
   ],
 };

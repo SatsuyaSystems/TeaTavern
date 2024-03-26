@@ -1,0 +1,27 @@
+form {
+    &#order-form {
+        // <form method="post" action="/api/set_order" id="order-form" class="text-center text-primary">
+        //     <h4>Order</h4>
+        //     <p>For postal shipments the maximum order value is €75 (10g)</p>                               
+        //     <input type="number" name="amount" class="text-center" placeholder="Money you spend" required/>
+        //     <input type="text" name="coupon" class="text-center" placeholder="Coupon (WIP)" disabled/>
+        //     <button class="btn-primary text-center" type="submit">Order</button>
+        // </form>
+
+        h4 {
+            font-weight: bold;
+        }
+
+        p {
+            font-size: 0.8rem;
+        }
+
+        input {
+            margin: 0.5rem;
+            padding: 0.5rem;
+            border: 1px solid $light;
+            border-radius: 25px;
+            width: 80%;
+        }
+    }
+}
