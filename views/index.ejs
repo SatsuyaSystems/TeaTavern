@@ -3,10 +3,11 @@
     <head>
         <title>Dashboard - Ahri's Oase</title>
         <link rel="stylesheet" href="/assets/css/styles.css">
-        <link rel="icon" href="https://cdn.discordapp.com/icons/1098656771595313182/58c6bce216de4f2e1d8189782f042734.webp?size=4096">
+        <link rel="icon" href="/assets/img/ao.ico">
 
         <script src="https://cdn.jsdelivr.net/npm/cash-dom/dist/cash.min.js"></script>
         <script src="/assets/js/jokes.js"></script>
+        <script src="/assets/js/client-orders.js"></script>
 
     </head>
 
@@ -26,13 +27,15 @@
                                     
 
 
-                                    <div class="col-3 pt-3">
+                                    <div class="col-3 pt-3 border-end">
                                         <form method="post" action="/api/set_order" id="order-form" class="text-center text-primary">
                                                 <h4>Order</h4>
-                                                <p>For postal shipments the maximum order value is €75 (10g)</p>                               
-                                                <input type="number" name="amount" class="text-center" placeholder="Money you spend" required/>
+                                                <p>For postal shipments the max order value is 10g</p>   
+                                                <hr>
+                                                <label for="amount">Amount in €</label> <br>                           
+                                                <input type="number" name="amount" class="text-center" required autocomplete="off" min="1" value="0"/>
                                                 <input type="text" name="coupon" class="text-center" placeholder="Coupon (WIP)" disabled/>
-                                                <button class="btn-primary text-center" type="submit">Order</button>
+                                                <button class="btn-primary text-center" type="submit">Place Order</button>
                                         </form>
                                     </div>
                                                 
@@ -40,25 +43,76 @@
 
 
 
-                                    <div class="col-6 pt-3">
+                                    <div class="col-6 pt-3 border-end">
+                                        
                                         <div class="accordion accordion-flush" id="accordionOrderFlush">
-                                            
-                                            <div class="list-group text-center" id="main-middle-two">
-                                                <button type="button" class="text-center list-group-item list-group-item-action" disabled><strong>Order History<br>Newest orders at the top</strong></button>                               
-        
+                                            <div class="text-center" id="main-middle-two">
+                                                <div class="text-center text-dark">
+                                                    <h4>
+                                                        <strong>Order History<br></strong>
+                                                    </h4>
+                                                    <p style="font-size: .8rem;">Newest orders at the top</p>
+                                                    <hr class="text-dark">
+                                                </div>
+
                                                 <% Orders.forEach(function(data) { %>
-                                                <div class="list-group-item">
-                                                    <div class="accordion-item">
-                                                        <h2 class="accordion-header" id="flush-heading<%- data['code'] %>">
-                                                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapse<%- data['code'] %>" aria-expanded="false" aria-controls="flush-collapse<%- data['code'] %>">
-                                                                <span class="w-100 text-center"><%- data['code'] %> | <%- data['amount'] %>€ | <%- data['payed'] ? 'Payed' : 'Awaiting Payment' %> | Shipped: <%- data['shipped'] ? '✅' : '❌' %></span>
-                                                            </button>
-                                                        </h2>
-                                                        <div id="flush-collapse<%- data['code'] %>" class="accordion-collapse collapse" aria-labelledby="flush-heading<%- data['code'] %>" data-bs-parent="#accordionOrderFlush">
-                                                            <div class="accordion-body">User: <code><%- data['user'] %></code> / <code><%- data['userid'] %></code><br><%- data['date'] %><br><%- data['info'] %></div>
+                                                    <button type="button" class="btn btn-primary w-100 p-2 mb-3" data-bs-toggle="modal" data-bs-target="#orderModal-<%- data['code'] %>">
+                                                        <%- data['code'] %> | <%- data['amount'] %>€ | <%- data['payed'] ? 'Payed' : 'Awaiting Payment' %> | Shipped: <%- data['shipped'] ? '✅' : '❌' %>
+                                                    </button>
+
+                                                    <div class="modal fade" id="orderModal-<%- data['code'] %>" tabindex="-1" aria-labelledby="orderModalLabel" aria-hidden="true">
+                                                        <div class="modal-dialog">
+                                                          <div class="modal-content cbg-white text-dark">
+                                                            <div class="modal-header text-center">
+                                                              <h5 class="modal-title w-100" id="orderModalLabel">Order Status</h5>
+                                                            </div>
+                                                            <div class="modal-body">
+
+                                                                <ul class="list-group list-group-horizontal bg-transparent">
+                                                                    <li class="list-group-item w-50 bg-transparent text-dark">User:</li>
+                                                                    <li class="list-group-item w-50 bg-transparent text-dark" data-bs-toggle="tooltip" data-bs-placement="top" title="<%- data['userid'] %>" onclick="copyText(event);"><code><%- data['user'] %></code></li>
+                                                                </ul>
+
+                                                                <ul class="list-group list-group-horizontal bg-transparent">
+                                                                    <li class="list-group-item w-50 bg-transparent text-dark">Bestellnummer:</li>
+                                                                    <li class="list-group-item w-50 bg-transparent text-dark"><%- data['code'] %></li>
+                                                                </ul>
+
+                                                                <ul class="list-group list-group-horizontal bg-transparent">
+                                                                    <li class="list-group-item w-50 bg-transparent text-dark">Date:</li>
+                                                                    <li class="list-group-item w-50 bg-transparent text-dark">
+                                                                        <%- `${new Date(data['date']).getDate().toString().padStart(2, '0')}/${(new Date(data['date']).getMonth() + 1).toString().padStart(2, '0')}/${new Date(data['date']).getFullYear()} ${new Date(data['date']).getHours().toString().padStart(2, '0')}:${new Date(data['date']).getMinutes().toString().padStart(2, '0')}` %>
+                                                                    </li>
+                                                                </ul>
+
+                                                                <ul class="list-group list-group-horizontal bg-transparent">
+                                                                    <li class="list-group-item w-50 bg-transparent text-dark">Betrag:</li>
+                                                                    <li class="list-group-item w-50 bg-transparent text-dark"><code><%- data['amount'] %> €</code></li>
+                                                                </ul>
+                                                                
+                                                                <ul class="list-group list-group-horizontal bg-transparent">
+                                                                    <li class="list-group-item w-50 bg-transparent text-dark">Bezahlt:</li>
+                                                                    <li class="list-group-item w-50 bg-transparent text-dark"><%- data['payed'] ? '✔️' : '❌' %></li>
+                                                                </ul>
+                                                                
+                                                                <ul class="list-group list-group-horizontal bg-transparent">
+                                                                    <li class="list-group-item w-50 bg-transparent text-dark">Bezahlt:</li>
+                                                                    <li class="list-group-item w-50 bg-transparent text-dark"><%- data['shipped'] ? '✔️' : '❌' %></li>
+                                                                </ul>
+
+                                                                <ul class="list-group list-group-horizontal bg-transparent">
+                                                                    <li class="list-group-item w-50 bg-transparent text-dark">Info:</li>
+                                                                    <li class="list-group-item w-50 bg-transparent text-dark"><%- data['info'] %></li>
+                                                                </ul>
+
+                                                            </div>
+                                                            <div class="modal-footer">
+                                                              <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Close</button>
+                                                            </div>
+                                                          </div>
                                                         </div>
                                                     </div>
-                                                </div>
+                                                    
                                                 <% }); %>
                                             </div>
                                         </div>
@@ -94,7 +148,7 @@
                             <% } %>
                             
                             
-                                <img src="https://cdn.discordapp.com/avatars/<%- User['id'] %>/<%- User['avatar']%>.<%- User['avatar'].startsWith('a_') ? 'gif' : 'png' %>" class="rounded-circle avatar-position" alt="Profile-image"/>
+                                <img src="https://cdn.discordapp.com/avatars/<%- User['id'] %>/<%- User['avatar']%>.<%- User['avatar'].startsWith('a_') ? 'gif' : 'png' %>" class="rounded-circle avatar-position" alt="PB of Current user"/>
                             </div>
                         </div>
                         <hr class="mt-4">         

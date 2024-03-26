@@ -17,6 +17,10 @@ html {
     background-color: #efe5d8 !important;
 }
 
+button[data-bs-toggle="modal"] {
+    border-radius: 25px;
+}
+
 // elements styling
 @import './elements/profile-banner.scss';
 @import './elements/card.scss';
@@ -24,4 +28,7 @@ html {
 
 
 // grouped styling.
-@import './groups/list-groups.scss'
+@import './groups/list-groups.scss';
+
+// styles
+@import './styles/rainbow-text.scss';

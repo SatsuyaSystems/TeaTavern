@@ -19,9 +19,30 @@ form {
         input {
             margin: 0.5rem;
             padding: 0.5rem;
-            border: 1px solid $light;
             border-radius: 25px;
             width: 80%;
+            background-color: #9e9885;
+            color: $light;
+            border: none;
+            outline: none;
+
+            &[disabled]{
+                background-color: #d3d3d3;
+                opacity: 0.5;
+            }
+        }
+
+
+        button[type="submit"] {
+            margin: 0.5rem;
+            padding: 0.5rem;
+            border-radius: 25px;
+            width: 80%;
+            background-color: $primary;
+            color: $light;
+            border: none;
+            outline: none;
+            font-weight: bold;
         }
     }
 }
