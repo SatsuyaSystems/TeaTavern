@@ -91,8 +91,8 @@ app.get('/oauth2/callback', async (req, res) => {
         
         if (isOnServer == true) {
             const jwtToken = jwt.sign(userResponse.data, OAuthConfig.jwt_secret, { expiresIn: '1d' });
-            res.cookie('auth', jwtToken, { httpOnly: true, secure: true });
-            res.redirect('/'); // or wherever you want to redirect after successful login
+            res.cookie('auth', jwtToken, { httpOnly: !OAuthConfig.dev, secure: !OAuthConfig.dev });
+            res.redirect('/');
         } else {
             res.send("NO PERMISSION!")
         }
@@ -129,7 +129,7 @@ mongoose.set('useFindAndModify', false);
 mongoose.connect(process.env.DB, { useNewUrlParser: true, useUnifiedTopology: true }).then(console.log("[INFO] Mongo loaded"))
 
 //PORT
-app.listen(port);
+app.listen(port, '0.0.0.0');
 console.log('[INFO] API Online!')
 console.log("hello world")
 

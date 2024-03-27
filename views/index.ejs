@@ -18,16 +18,16 @@
 
             <div class="row">
             
-                <div class="container col-8 cbg-white rounded">
+                <div class="container col-12 col-xxl-8 cbg-white rounded">
 
                     <div class="row mb-3">
                         <div class="mt-5"> <!-- Main Container -->
-                            <div class="container p-0">
+                            <div class="container p-0" id="responsive-container">
                                 <div class="row">
                                     
 
 
-                                    <div class="col-3 pt-3 border-end">
+                                    <div class="col-12 col-lg-3 pt-3 border-end">
                                         <form method="post" action="/api/set_order" id="order-form" class="text-center text-primary">
                                                 <h4>Order</h4>
                                                 <p>For postal shipments the max order value is 10g</p>   
@@ -38,12 +38,8 @@
                                                 <button class="btn-primary text-center" type="submit">Place Order</button>
                                         </form>
                                     </div>
-                                                
-                                    
 
-
-
-                                    <div class="col-6 pt-3 border-end">
+                                    <div class="col-12 col-lg-6 pt-3 border-end">
                                         
                                         <div class="accordion accordion-flush" id="accordionOrderFlush">
                                             <div class="text-center" id="main-middle-two">
@@ -119,7 +115,7 @@
         
                                     </div>
         
-                                    <div class="col-3 pt-3">
+                                    <div class="col-12 col-lg-3 pt-3 text-center text-lg-start">
                                         <div class="list-group text-dark text-left">
                                             <h4 class="text-center"><strong>Blüten:</strong></h4>
                                             <p></p>
@@ -132,6 +128,7 @@
                                         </div>
         
                                     </div>
+
                                 </div>
                             </div>
                         </div>    
@@ -140,7 +137,7 @@
     
     
                 
-                <div class="col-2">
+                <div class="col-2 d-none d-xxl-block">
                     <div class="card">
                         <div class="position-relative pb-5">
                             <% if (User['banner']){ %>

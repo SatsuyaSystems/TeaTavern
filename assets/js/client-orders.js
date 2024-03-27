@@ -29,3 +29,19 @@ function copyText(event) {
         copyText.classList.toggle('rainbow_text_animated');
     }, 1000);
 }
+
+
+function adjustContainer() {
+    const container = document.getElementById('responsive-container');
+    if (window.innerWidth < 992) { // Use 992px as the lg breakpoint
+      container.classList.remove('container');
+      container.classList.add('container-fluid');
+    } else {
+      container.classList.add('container');
+      container.classList.remove('container-fluid');
+    }
+  }
+  
+// Adjust on load and resize
+window.addEventListener('load', adjustContainer);
+window.addEventListener('resize', adjustContainer);

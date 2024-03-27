@@ -11855,9 +11855,16 @@ html {
   height: 100vh;
   width: 100vw;
   background-image: url(/assets/375b15ffbac7ea54e5e6.webp);
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-color: #9c8672;
 }
 
 .cbg-white {
+  background-color: rgba(239, 229, 216, 0.9333333333) !important;
+}
+.cbg-white.modal-content {
   background-color: #efe5d8 !important;
 }
 

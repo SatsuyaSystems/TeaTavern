@@ -4,12 +4,10 @@ const Orders = require('../models/Order')
 const Admins = require('../config/admins.json')
 
 router.get('/', async(req, res) => {
-    if (req.useragent.isMobile == true) return res.render("403")
     res.redirect('/dashboard')
 })
 
 router.get('/dashboard', async(req, res) => {
-    if (req.useragent.isMobile == true) return res.render("403")
     Orders.find({userid: req.user.id}, function(err, orders){
         var isAdmin = false
         if (Admins.user.includes(req.user.id)) { isAdmin = true }
