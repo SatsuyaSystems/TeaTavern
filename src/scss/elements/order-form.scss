@@ -1,3 +1,19 @@
+@mixin input-style {
+    margin: 0.5rem;
+    padding: 0.5rem;
+    border-radius: 25px;
+    width: 80%;
+    background-color: #9e9885;
+    color: $light;
+    border: none;
+    outline: none;
+
+    &[disabled]{
+        background-color: #d3d3d3;
+        opacity: 0.5;
+    }
+}
+
 form {
     &#order-form {
         // <form method="post" action="/api/set_order" id="order-form" class="text-center text-primary">
@@ -17,19 +33,7 @@ form {
         }
 
         input {
-            margin: 0.5rem;
-            padding: 0.5rem;
-            border-radius: 25px;
-            width: 80%;
-            background-color: #9e9885;
-            color: $light;
-            border: none;
-            outline: none;
-
-            &[disabled]{
-                background-color: #d3d3d3;
-                opacity: 0.5;
-            }
+            @include input-style;
         }
 
 
@@ -45,4 +49,8 @@ form {
             font-weight: bold;
         }
     }
+}
+
+.cinput-style {
+    @include input-style;
 }

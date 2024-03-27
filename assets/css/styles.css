@@ -11924,6 +11924,21 @@ form#order-form button[type=submit] {
   font-weight: bold;
 }
 
+.cinput-style {
+  margin: 0.5rem;
+  padding: 0.5rem;
+  border-radius: 25px;
+  width: 80%;
+  background-color: #9e9885;
+  color: #fcfff9;
+  border: none;
+  outline: none;
+}
+.cinput-style[disabled] {
+  background-color: #d3d3d3;
+  opacity: 0.5;
+}
+
 .rainbow_text_animated {
   background: linear-gradient(to right, #6666ff, #0099ff, #00ff00, #ff3399, #6666ff);
   -webkit-background-clip: text;
