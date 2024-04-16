@@ -4,6 +4,7 @@ const urlencodedParser = bodyParser.urlencoded({ extended: false })
 const router = express.Router();
 const Admins = require('../config/admins.json')
 const Orders = require('../models/Order')
+const Archive = require('../models/Archive')
 
 function generate(n) {
     var add = 1, max = 12 - add;   // 12 is the min safe number Math.random() can generate without it starting to pad the end with zeros.   
@@ -41,6 +42,25 @@ router.get('/cancel_order/:code', urlencodedParser, async(req, res) => {
     if (!Admins.user.includes(req.user.id)) return res.redirect("/")
     await Orders.findOneAndDelete({code: req.params.code})
     res.redirect("/admin")
+})
+
+router.get('/archive_order/:code', urlencodedParser, async(req, res) => {
+    if (!Admins.user.includes(req.user.id)) return res.redirect("/")
+    Orders.findOne({code: req.params.code}, async function(err, orders) {
+        const moveArchive = new Archive({
+            user: orders.user,
+            userid: orders.userid,
+            amount: orders.amount,
+            payed: orders.payed,
+            shipped: orders.shipped,
+            info: orders.info,
+            code: orders.code,
+            date: orders.date
+        })
+        moveArchive.save()
+        await Orders.findOneAndDelete({code: req.params.code})
+        res.redirect("/admin")
+    })
 })
 
 router.get('/*', urlencodedParser, async(req, res) => {

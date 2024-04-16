@@ -1,7 +1,7 @@
 {
     "client_id": "520307592212381699",
     "client_secret":"BBS7kNxwnsPy6rpoUwr-lWRkkXew9pTM",
-    "redirect_uri":"http://192.168.188.81:25567/oauth2/callback",
+    "redirect_uri":"http://127.0.0.1:25567/oauth2/callback",
     "jwt_secret":"u8i235hdfph23puhf32",
     "dev": true
-}
+} 

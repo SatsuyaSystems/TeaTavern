@@ -1,7 +1,8 @@
 const express = require('express');
 const router = express.Router();
 const Orders = require('../models/Order')
-const Admins = require('../config/admins.json')
+const Admins = require('../config/admins.json');
+const Archive = require('../models/Archive');
 
 router.get('/', async(req, res) => {
     res.redirect('/dashboard')
@@ -45,6 +46,23 @@ router.get('/admin/:userid', async(req, res) => {
             res.render('admin', {
                 User: req.user,
                 Orders: orders.reverse(),
+                Admin: isAdmin
+            })
+        } else {
+            res.redirect("/")
+        }
+    })
+})
+
+router.get('/archive', async(req, res) => {
+    if (req.useragent.isMobile == true) return res.render("403")
+    Archive.find({}, function(err, archive){
+        var isAdmin = false
+        if (Admins.user.includes(req.user.id)) { 
+            isAdmin = true 
+            res.render('admin', {
+                User: req.user,
+                Orders: archive.reverse(),
                 Admin: isAdmin
             })
         } else {
