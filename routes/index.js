@@ -60,7 +60,7 @@ router.get('/archive', async(req, res) => {
         var isAdmin = false
         if (Admins.user.includes(req.user.id)) { 
             isAdmin = true 
-            res.render('admin', {
+            res.render('archive', {
                 User: req.user,
                 Orders: archive.reverse(),
                 Admin: isAdmin
