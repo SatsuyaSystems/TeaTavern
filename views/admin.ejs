@@ -102,9 +102,6 @@
 
                                                         <div class="modal-footer justify-content-center">
                                                             <button type="submit" form="orderInfoForm-<%- data['code'] %>" class="btn btn-primary w-25" data-bs-dismiss="modal">Save</button>
-                                                            <% if (data['shipped'] != true || data['payed'] != true) { %>
-                                                                <a href="/api/cancel_order/<%- data['code'] %>" class="btn btn-danger w-25">Delete</a>
-                                                            <% } %>
                                                             <% if (data['shipped'] == true || data['payed'] == true) { %>
                                                             <a href="/api/archive_order/<%- data['code'] %>" class="btn btn-danger w-25">Archive</a>
                                                             <% } %>
